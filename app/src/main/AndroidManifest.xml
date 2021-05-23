@@ -11,6 +11,8 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/Theme.PokeApp">
+        <activity android:name=".PokemonDetails" />
+        <activity android:name=".GenerationsActivity" />
         <activity android:name=".PokedexActivity2">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />

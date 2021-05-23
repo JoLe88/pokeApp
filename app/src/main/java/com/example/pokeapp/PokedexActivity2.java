@@ -2,9 +2,9 @@ package com.example.pokeapp;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.GridLayoutManager;
-import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import android.content.Intent;
 import android.database.Cursor;
 import android.os.Bundle;
 import android.util.Log;
@@ -25,6 +25,8 @@ public class PokedexActivity2 extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_pokedex);
+
+        // Hide Actionbar
         getWindow().setFlags(
                 WindowManager.LayoutParams.FLAG_FULLSCREEN,
                 WindowManager.LayoutParams.FLAG_FULLSCREEN);
@@ -36,10 +38,9 @@ public class PokedexActivity2 extends AppCompatActivity {
 
 
 
-
-
         createExampleListArray();
-        buldRecyclerView();
+        buildRecyclerView();
+
 
 
     }
@@ -47,10 +48,8 @@ public class PokedexActivity2 extends AppCompatActivity {
 
 
     public void createExampleListArray(){
-        for (int i = 1; i <= 800; i++) {
+        for (int i = 1; i <= 898; i++) {
             Cursor cursor = myDatabaseHelper.readFromDatabase(i);
-
-            Log.d("exampleList: ", exampleList.toString());
 
             if(cursor.getCount() == 0){
                 Toast.makeText(this, "No Data", Toast.LENGTH_SHORT).show();
@@ -61,13 +60,20 @@ public class PokedexActivity2 extends AppCompatActivity {
                                     cursor.getInt(0),
                                     cursor.getString(1),
                                     cursor.getString(2),
-                                    cursor.getString(3)));
+                                    cursor.getString(3),
+                                    cursor.getString(4),
+                                    cursor.getString(5),
+                                    cursor.getString(6),
+                                    cursor.getString(7),
+                                    cursor.getString(8),
+                                    cursor.getString(9),
+                                    cursor.getString(10)));
                 }
             }
         }
     }
 
-    public  void buldRecyclerView() {
+    public  void buildRecyclerView() {
         recyclerView = findViewById(R.id.recycler_view);
         recyclerView.setHasFixedSize(true);
 
@@ -80,5 +86,16 @@ public class PokedexActivity2 extends AppCompatActivity {
         GridLayoutManager gridLayoutManager = new GridLayoutManager(this,2,GridLayoutManager.VERTICAL, false);
         recyclerView.setLayoutManager(gridLayoutManager);
 
+        // OnClickListener
+        exampleAdapter.setOnItemClickListener(new ExampleAdapter.OnItemClickListener() {
+            @Override
+            public void onItemClick(int position) {
+                //Toast.makeText(PokedexActivity2.this, position+1+"", Toast.LENGTH_SHORT).show();
+                Intent intent = new Intent(PokedexActivity2.this, PokemonDetails.class);
+                intent.putExtra("Example Item", exampleList.get(position));
+
+                startActivity(intent);
+            }
+        });
     }
 }
