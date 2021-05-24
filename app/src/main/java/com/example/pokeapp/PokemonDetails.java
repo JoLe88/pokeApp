@@ -1,36 +1,28 @@
 package com.example.pokeapp;
 
+import androidx.annotation.DrawableRes;
 import androidx.appcompat.app.AppCompatActivity;
-import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.constraintlayout.widget.ConstraintLayout;
+import androidx.recyclerview.widget.RecyclerView;
 
 import android.content.Intent;
 import android.os.Bundle;
-import android.util.Log;
+import android.view.View;
 import android.view.WindowManager;
 import android.widget.ImageView;
 import android.widget.TextView;
-import android.widget.Toast;
 
-import com.android.volley.Request;
 import com.android.volley.RequestQueue;
-import com.android.volley.Response;
-import com.android.volley.VolleyError;
-import com.android.volley.toolbox.JsonObjectRequest;
 import com.android.volley.toolbox.Volley;
-
-import org.json.JSONArray;
-import org.json.JSONException;
-import org.json.JSONObject;
-
-import java.util.ArrayList;
 
 public class PokemonDetails extends AppCompatActivity {
     int imageUrl, index;
     String pokemonName, type1, type2, hp, atk, def, spAtk, spDef, speed, total;
-    ImageView imageViewSprite;
-    TextView textViewPokemonname, textViewPokemonDetailsType1, textViewPokemonDetailsType2,
-            textViewPokemonDetailsHp, textViewPokemonDetailsAtk, textViewPokemonDetailsDef,
-            textViewPokemonDetailsSpAtk, textViewPokemonDetailsSpDef, gtextViewPokemonDetailsSpeed, textViewPokemonDetailsTotal;
+    ImageView imageViewSprite,
+            textViewPokemonDetailsHpBar, textViewPokemonDetailsAtkBar, textViewPokemonDetailsDefBar, textViewPokemonDetailsSpAtkBar,
+            textViewPokemonDetailsSpDefBar, textViewPokemonDetailsSpeedBar, textViewPokemonDetailsTotalBar;
+    TextView textViewPokemonname, textViewPokemonDetailsType1, textViewPokemonDetailsType2, textViewPokemonDetailsHp, textViewPokemonDetailsAtk, textViewPokemonDetailsDef,  textViewPokemonDetailsSpAtk, textViewPokemonDetailsSpDef, textViewPokemonDetailsSpeed, textViewPokemonDetailsTotal;
+    ConstraintLayout constraintLayoutBackgroundTop;
     RequestQueue mQueue;
 
     @Override
@@ -50,13 +42,24 @@ public class PokemonDetails extends AppCompatActivity {
         imageViewSprite = findViewById(R.id.imageViewPokekomenDetailsSprite);
         textViewPokemonDetailsType1 = findViewById(R.id.textViewPokemonDetailsType1);
         textViewPokemonDetailsType2 = findViewById(R.id.textViewPokemonDetailsType2);
+        // Stats
         textViewPokemonDetailsHp = findViewById(R.id.textViewPokemonDetailsHp);
         textViewPokemonDetailsAtk = findViewById(R.id.textViewPokemonDetailsAtk);
         textViewPokemonDetailsDef = findViewById(R.id.textViewPokemonDetailsDef);
         textViewPokemonDetailsSpAtk = findViewById(R.id.textViewPokemonDetailsSpAtk);
         textViewPokemonDetailsSpDef = findViewById(R.id.textViewPokemonDetailsSpDef);
-        gtextViewPokemonDetailsSpeed = findViewById(R.id.textViewPokemonDetailsSpeed);
+        textViewPokemonDetailsSpeed = findViewById(R.id.textViewPokemonDetailsSpeed);
         textViewPokemonDetailsTotal = findViewById(R.id.textViewPokemonDetailsTotal);
+        // Stat Bars
+        textViewPokemonDetailsHpBar = findViewById(R.id.textViewPokemonDetailsHpBar);
+        textViewPokemonDetailsAtkBar = findViewById(R.id.textViewPokemonDetailsAtkBar);
+        textViewPokemonDetailsDefBar = findViewById(R.id.textViewPokemonDetailsDefBar);
+        textViewPokemonDetailsSpAtkBar = findViewById(R.id.textViewPokemonDetailsSpAtkBar);
+        textViewPokemonDetailsSpDefBar = findViewById(R.id.textViewPokemonDetailsSpDefBar);
+        textViewPokemonDetailsSpeedBar = findViewById(R.id.textViewPokemonDetailsSpeedBar);
+        textViewPokemonDetailsTotalBar = findViewById(R.id.textViewPokemonDetailsTotalBar);
+
+        constraintLayoutBackgroundTop = findViewById(R.id.constraintLayoutBackgroundTop);
 
         // passed intent
         Intent intent = getIntent();
@@ -76,6 +79,8 @@ public class PokemonDetails extends AppCompatActivity {
         speed = exampleItem.getSpeed();
         total = exampleItem.getTotal();
 
+        ;
+
         mQueue = Volley.newRequestQueue(this);
 
         textViewPokemonname.setText(pokemonName);
@@ -87,8 +92,78 @@ public class PokemonDetails extends AppCompatActivity {
         textViewPokemonDetailsDef.setText(spAtk);
         textViewPokemonDetailsSpAtk.setText(def);
         textViewPokemonDetailsSpDef.setText(spDef);
-        gtextViewPokemonDetailsSpeed.setText(speed);
+        textViewPokemonDetailsSpeed.setText(speed);
         textViewPokemonDetailsTotal.setText(total);
+
+        textViewPokemonDetailsHpBar.getLayoutParams().width = ((220/100)*Integer.parseInt(hp));
+        textViewPokemonDetailsAtkBar.getLayoutParams().width = ((220/100)*Integer.parseInt(atk));
+        textViewPokemonDetailsDefBar.getLayoutParams().width = ((220/100)*Integer.parseInt(spAtk));
+        textViewPokemonDetailsSpAtkBar.getLayoutParams().width = ((220/100)*Integer.parseInt(def));
+        textViewPokemonDetailsSpDefBar.getLayoutParams().width = ((220/100)*Integer.parseInt(spDef));
+        textViewPokemonDetailsSpeedBar.getLayoutParams().width = ((220/100)*Integer.parseInt(speed));
+        textViewPokemonDetailsTotalBar.getLayoutParams().width = ((220/200)*Integer.parseInt(total));
+
+        if (type2.isEmpty()){
+            textViewPokemonDetailsType2.setVisibility(View.GONE);
+        }
+
+        switch(type1) {
+            case "Bug":
+                constraintLayoutBackgroundTop.setBackgroundResource(R.color.type_bug);
+                break;
+            case "Dark":
+                constraintLayoutBackgroundTop.setBackgroundResource(R.color.type_dark);
+                break;
+            case "Dragon":
+                constraintLayoutBackgroundTop.setBackgroundResource(R.color.type_dragon);
+                break;
+            case "Electric":
+                constraintLayoutBackgroundTop.setBackgroundResource(R.color.type_electric);
+                break;
+            case "Fairy":
+                constraintLayoutBackgroundTop.setBackgroundResource(R.color.type_fairy);
+                break;
+            case "Fighting":
+                constraintLayoutBackgroundTop.setBackgroundResource(R.color.type_fighting);
+                break;
+            case "Fire":
+                constraintLayoutBackgroundTop.setBackgroundResource(R.color.type_fire);
+                break;
+            case "Flying":
+                constraintLayoutBackgroundTop.setBackgroundResource(R.color.type_flying);
+                break;
+            case "Ghost":
+                constraintLayoutBackgroundTop.setBackgroundResource(R.color.type_ghost);
+                break;
+            case "Grass":
+                constraintLayoutBackgroundTop.setBackgroundResource(R.color.type_grass);
+                break;
+            case "Ground":
+                constraintLayoutBackgroundTop.setBackgroundResource(R.color.type_ground);
+                break;
+            case "Ice":
+                constraintLayoutBackgroundTop.setBackgroundResource(R.color.type_ice);
+                break;
+            case "Normal":
+                constraintLayoutBackgroundTop.setBackgroundResource(R.color.type_normal);
+                break;
+            case "Poison":
+                constraintLayoutBackgroundTop.setBackgroundResource(R.color.type_poison);
+                break;
+            case "Psychic":
+                constraintLayoutBackgroundTop.setBackgroundResource(R.color.type_psychic);
+                break;
+            case "Rock":
+                constraintLayoutBackgroundTop.setBackgroundResource(R.color.type_rock);
+                break;
+            case "Steel":
+                constraintLayoutBackgroundTop.setBackgroundResource(R.color.type_steel);
+                break;
+            case "Water":
+                constraintLayoutBackgroundTop.setBackgroundResource(R.color.type_water);
+                break;
+        }
+
 
 
         //parseJSON(index);

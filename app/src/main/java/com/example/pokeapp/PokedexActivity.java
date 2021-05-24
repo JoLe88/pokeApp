@@ -7,13 +7,12 @@ import androidx.recyclerview.widget.RecyclerView;
 import android.content.Intent;
 import android.database.Cursor;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.WindowManager;
 import android.widget.Toast;
 
 import java.util.ArrayList;
 
-public class PokedexActivity2 extends AppCompatActivity {
+public class PokedexActivity extends AppCompatActivity {
 
     private ArrayList<ExampleItem> exampleList;
     private RecyclerView recyclerView;
@@ -36,9 +35,11 @@ public class PokedexActivity2 extends AppCompatActivity {
         myDatabaseHelper = new MyDatabaseHelper(this);
         exampleList = new ArrayList<>();
 
+        // passed intent
+        int from = 1;
+        int to = 151;
 
-
-        createExampleListArray();
+        createExampleListArray(from, to);
         buildRecyclerView();
 
 
@@ -47,8 +48,8 @@ public class PokedexActivity2 extends AppCompatActivity {
 
 
 
-    public void createExampleListArray(){
-        for (int i = 1; i <= 898; i++) {
+    public void createExampleListArray(int from, int to){
+        for (int i = from; i <= to; i++) {
             Cursor cursor = myDatabaseHelper.readFromDatabase(i);
 
             if(cursor.getCount() == 0){
@@ -91,7 +92,7 @@ public class PokedexActivity2 extends AppCompatActivity {
             @Override
             public void onItemClick(int position) {
                 //Toast.makeText(PokedexActivity2.this, position+1+"", Toast.LENGTH_SHORT).show();
-                Intent intent = new Intent(PokedexActivity2.this, PokemonDetails.class);
+                Intent intent = new Intent(PokedexActivity.this, PokemonDetails.class);
                 intent.putExtra("Example Item", exampleList.get(position));
 
                 startActivity(intent);

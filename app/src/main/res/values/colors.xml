@@ -9,7 +9,7 @@
     <color name="white">#FFFFFFFF</color>
 
     <color name="type_normal">#929aa1</color>
-    <color name="type_fight">#c04e6b</color>
+    <color name="type_fighting">#c04e6b</color>
     <color name="type_flying">#93a8da</color>
     <color name="type_poison">#a16fc3</color>
     <color name="type_ground">#cd7e4f</color>
