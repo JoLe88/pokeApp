@@ -13,14 +13,14 @@
         android:theme="@style/Theme.PokeApp">
         <activity android:name=".PokemonDetails" />
         <activity android:name=".GenerationsActivity">
-
-        </activity>
-        <activity android:name=".PokedexActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
+
+        </activity>
+        <activity android:name=".PokedexActivity">
 
         </activity>
     </application>

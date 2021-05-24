@@ -46,52 +46,69 @@ public class GenerationsActivity extends AppCompatActivity implements View.OnCli
     @Override
     public void onClick(View v) {
         Intent intent = new Intent(GenerationsActivity.this, PokedexActivity.class);
+        int from, to;
         switch (v.getId()){
             case R.id.generation1:
-                intent.putExtra("from", 1);
-                intent.putExtra("to", 151);
+                from = 1;
+                to = 151;
+                intent.putExtra("from", from);
+                intent.putExtra("to", to);
                 startActivity(intent);
                 break;
 
             case R.id.generation2:
-                intent.putExtra("from", 152);
-                intent.putExtra("to", 251);
+                from = 152;
+                to = 251;
+                intent.putExtra("from", from);
+                intent.putExtra("to", to);
                 startActivity(intent);
                 break;
 
             case R.id.generation3:
-                intent.putExtra("from", 252);
-                intent.putExtra("to", 386);
+                from = 252;
+                to = 386;
+                intent.putExtra("from", from);
+                intent.putExtra("to", to);
                 startActivity(intent);
                 break;
 
             case R.id.generation4:
-                intent.putExtra("from", 387);
-                intent.putExtra("to", 493);
+                from = 387;
+                to = 493;
+                intent.putExtra("from", from);
+                intent.putExtra("to", to);
                 startActivity(intent);
                 break;
 
             case R.id.generation5:
-                intent.putExtra("from", 494);
-                intent.putExtra("to", 649);
+                from = 494;
+                to = 649;
+                intent.putExtra("from", from);
+                intent.putExtra("to", to);
                 startActivity(intent);
                 break;
 
             case R.id.generation6:
-                intent.putExtra("from", 650);
-                intent.putExtra("to", 721);
+                from = 650;
+                to = 721;
+                intent.putExtra("from", from);
+                intent.putExtra("to", to);
                 startActivity(intent);
                 break;
 
             case R.id.generation7:
-                intent.putExtra("from", 722);
-                intent.putExtra("to", 810);
+                from = 722;
+                to = 810;
+                intent.putExtra("from", from);
+                intent.putExtra("to", to);
                 startActivity(intent);
                 break;
 
             case R.id.generation8:
-                intent.putExtra("from", 1);
-                intent.putExtra("to", 151);
+                from = 811;
+                to = 898;
+                intent.putExtra("from", from);
+                intent.putExtra("to", to);
                 startActivity(intent);
                 break;
 

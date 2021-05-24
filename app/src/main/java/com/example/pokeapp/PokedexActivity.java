@@ -36,8 +36,8 @@ public class PokedexActivity extends AppCompatActivity {
         exampleList = new ArrayList<>();
 
         // passed intent
-        int from = 1;
-        int to = 151;
+        int from = getIntent().getIntExtra("from",1);
+        int to = getIntent().getIntExtra("to",1);;
 
         createExampleListArray(from, to);
         buildRecyclerView();
